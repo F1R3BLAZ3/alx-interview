@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """
 Module for generating Pascal's Triangle.
 
