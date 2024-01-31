@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Check if the given data set represents a valid UTF-8 encoding.
+"""
+
 
 def validUTF8(data):
     """Check if the given data set represents a valid UTF-8 encoding.
