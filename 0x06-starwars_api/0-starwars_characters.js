@@ -2,24 +2,41 @@
 
 const request = require('request');
 
-const movieId = process.argv[2];
-const url = `https://swapi.dev/api/films/${movieId}/`;
+function fetchCharacter(characterUrl) {
+  return new Promise((resolve, reject) => {
+    request(characterUrl, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else {
+        const characterData = JSON.parse(body);
+        resolve(characterData.name);
+      }
+    });
+  });
+}
 
-request(url, function (error, response, body) {
-  if (error) {
-    console.error('Error:', error);
-  } else {
-    const filmData = JSON.parse(body);
-    const characters = filmData.characters;
-    characters.forEach(characterUrl => {
-      request(characterUrl, function (error, response, body) {
+async function fetchAndPrintCharacters(movieId) {
+  try {
+    const filmUrl = `https://swapi.dev/api/films/${movieId}/`;
+    const filmResponse = await new Promise((resolve, reject) => {
+      request(filmUrl, (error, response, body) => {
         if (error) {
-          console.error('Error:', error);
+          reject(error);
         } else {
-          const characterData = JSON.parse(body);
-          console.log(characterData.name);
+          resolve(JSON.parse(body));
         }
       });
     });
+
+    const characters = filmResponse.characters;
+    for (const characterUrl of characters) {
+      const characterName = await fetchCharacter(characterUrl);
+      console.log(characterName);
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
-});
+}
+
+const movieId = process.argv[2];
+fetchAndPrintCharacters(movieId);
