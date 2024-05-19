@@ -2,8 +2,10 @@
 """
 Log Statistics
 
-This script reads log lines from standard input and computes statistics such as total file size and the count of various HTTP status codes.
-Statistics are printed after every 10 lines and upon termination via keyboard interrupt (CTRL + C).
+This script reads log lines from standard input and computes statistics such as 
+total file size and the count of various HTTP status codes.
+Statistics are printed after every 10 lines and upon termination via keyboard 
+interrupt (CTRL + C).
 """
 
 import sys
@@ -52,7 +54,9 @@ try:
         if len(parts) != 10:
             continue
         
-        ip, dash, date, request, status_code, file_size = parts[0], parts[1], parts[2], parts[3:6], parts[6], parts[9]
+        ip, dash, date, request, status_code, file_size = (
+            parts[0], parts[1], parts[2], parts[3:6], parts[6], parts[9]
+        )
         
         # Validate the request format
         if request[0] != '"GET' or request[2] != 'HTTP/1.1"':
