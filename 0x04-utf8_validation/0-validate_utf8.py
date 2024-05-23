@@ -4,7 +4,7 @@ Module to check the validity of UTF-8 encoding.
 """
 
 
-def valid_utf8(data):
+def validUTF8(data):
     """
     Check if the given list of bytes represents a valid UTF-8 encoding.
 
