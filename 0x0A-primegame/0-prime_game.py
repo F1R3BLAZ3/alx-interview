@@ -4,7 +4,7 @@ Module to determine the winner of the Prime Game between Maria and Ben.
 """
 
 
-def is_winner(x, nums):
+def isWinner(x, nums):
     """
     Determine the winner of the Prime Game after x rounds.
 
